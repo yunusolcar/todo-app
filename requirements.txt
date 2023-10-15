@@ -1,0 +1,17 @@
+Gereksinimler
+1- Projede kullanicilar olacak ve bu kullanicilar sisteme giris yapabilecek
+2 her kullanici kendine bir adet board tanimlayabilecek
+3 her bordu birden fazla kullanici kullanabilecek, bordun kullanici olmayan kullanicilar bordu goremeyecek
+4 kullanicilar bu boardlarda todo-listeleri olusturabilecek(otomatik board-admin olacak)
+5 kullanicila bu listere item ekleyebilecek
+6 liste olusturma yetkisi sadece board-admin ve managerda olacak
+6 kullanicilar sadece kendi ekledikleri itemleri silip duzenleyebilecek (member)
+7 kullanicilarin cesitli rolleri olacak, member, manager, board-admin
+member: board kullanicisi
+board-admin: bordu olusturan
+manager: boardda yetkili
+8 manager tum itemleri duzenleyip silebilecek
+9- her bi itemde item adi, aciklama, resim, item sorumlulari, olusturulma tarihi, tamamlanma tarihi bilgileri olusturabilecek
+10- kullanicilar itemlere yorum yapabilecek
+11 kullanici mail adresi ile sisteme giris yapacak
+12 kullanici uye olurken main ile aktivasyon olacak, kullanici sifre sifirlama yapabilecek
