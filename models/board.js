@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const boardSchema = new Schema({
      name: {
           type: String,
-          unique: true,
           required: true
      },
      createdAt: {
@@ -16,13 +15,12 @@ const boardSchema = new Schema({
           required: false,
           trim: true
      },
-     boardMembers: {
-          type: String,
-          required: true
-     },
-     boardOwners: {
-          type: String,
-          required: true
+     members: [{
+          name: String,
+          email: String
+     }],
+     manager: {
+          name: String
      }
 });
 

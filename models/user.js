@@ -19,7 +19,7 @@ const userSchema = new Schema({
           type: String,
           required: true
      },
-     isAdmin: {
+     isActive: {
           type: Boolean,
           required: true,
           default: false

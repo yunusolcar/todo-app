@@ -12,11 +12,10 @@ const taskSchema = new Schema({
           trim: true,
           required: false
      },
-     taskMembers: {
-          type: String,
-          unique: true,
-          required: true
-     },
+     members: [{
+          name: String,
+          email: String
+     }],
      status: {
           type: Number,
           enum: [0, 1, 2], //0: New        1: In Progress       2: Completed

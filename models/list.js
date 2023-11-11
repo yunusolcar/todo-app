@@ -4,14 +4,14 @@ const Schema = mongoose.Schema;
 const listSchema = new Schema({
      name: {
           type: String,
-          unique: true,
           required: true,
      },
-     owners: {
-          type: String,
-          unique: true,
-          required: true,
-     }
+     menager: {
+          type: String // buraya list name ve task gelicek
+     },
+     tasks: [{
+          taskName: String
+     }]
 });
 
 const List = mongoose.model("List", listSchema);
