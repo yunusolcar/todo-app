@@ -1,5 +1,11 @@
-exports.getIndexPage = (req, res) => {
+exports.getIndex = (req, res) => {
      res.status(200).render('index', {
-          page_name: "Index"
+          pageName: "Index"
+     });
+}
+
+exports.getRegister = (req, res) => {
+     res.status(200).render('register', {
+          pageName: 'Register'
      });
 }

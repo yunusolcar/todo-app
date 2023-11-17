@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const taskControllers = require("./controllers/taskControllers");
 const taskRoutes = require("./routes/taskRoutes");
 const pageRoutes = require("./routes/pageRoutes");
+const userRoutes = require("./routes/userRoutes");
 const db = require("./data/db");
 
 const app = express();
@@ -21,7 +22,7 @@ app.use(express.urlencoded({
 //Routes
 app.use('/', pageRoutes);
 app.use('/tasks', taskRoutes);
-
+app.use('/users', userRoutes);
 //Port
 const port = 3000;
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
