@@ -1,4 +1,5 @@
 exports.getIndex = (req, res) => {
+     console.log(req.session.userId);
      res.status(200).render('index', {
           pageName: "Index"
      });

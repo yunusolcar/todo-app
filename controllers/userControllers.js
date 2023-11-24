@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 exports.createUser = async (req, res) => {
      try {
           const user = await User.create(req.body);
+
           res.status(201).json({
                status: "success - user",
                user
@@ -14,7 +15,7 @@ exports.createUser = async (req, res) => {
                err
           });
      }
-}
+};
 
 exports.loginUser = async (req, res) => {
      try {
@@ -23,27 +24,25 @@ exports.loginUser = async (req, res) => {
                password
           } = req.body;
 
-          const user = await User.findOne({
-               mail
-          });
-
+          const user = await User.findOne({mail});
           if (user) {
                bcrypt.compare(password, user.password, (err, same) => {
                     if (same) {
-                         res.status(200).send("Login successfully completed");
-                    } else {
-                         res.status(400).send("Incorrect username & password!");
+                         req.session.userId = user._id;
+                         res.status(200).redirect('/');
                     }
                });
-
-          } else {
-               res.status(404).send("User not found!")
           }
-
      } catch (err) {
           res.status(400).json({
                status: "ERROR",
                err
           })
      }
+}
+
+exports.logoutUser = (req, res) => {
+     req.session.destroy(() => {
+          res.redirect('/');
+     })
 }
