@@ -23,12 +23,11 @@ app.use(express.urlencoded({
      extended: true
 }));
 app.use(session({
-     secret: settings.sessionSecret,
+     secret: settings.mongoConfig.sessionSecret,
      resave: false,
      saveUninitialized: false,
      store: mongoStore.mongoStoreCon
 }));
-
 
 //Routes
 app.use('*', (req, res, next) => {
@@ -40,5 +39,5 @@ app.use('/tasks', taskRoutes);
 app.use('/users', userRoutes);
 
 //Port
-const port = settings.port;
+const port = settings.mongoConfig.port;
 app.listen(port, () => console.log(`TO-DO App working`));
