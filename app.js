@@ -21,6 +21,15 @@ app.use(
 app.use("/", pageRoutes);
 app.use("/tasks", taskRoutes);
 
+//Error handler
+// eslint-disable-next-line no-unused-vars
+app.use((error, req, res, next) => {
+    res.status(400).json({
+        status: "fail",
+        error: error.message,
+    });
+});
+
 //Port
 const port = 3000;
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

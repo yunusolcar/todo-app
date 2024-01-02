@@ -1,31 +1,18 @@
 const Task = require("../models/task");
+const ash = require("express-async-handler");
 
-exports.postCreateTask = async (req, res) => {
-    try {
-        const task = await Task.create(req.body);
-        res.status(201).json({
-            status: "success",
-            task,
-        });
-    } catch (error) {
-        res.status(400).json({
-            status: "fail",
-            error,
-        });
-    }
-};
+exports.postCreateTask = ash(async (req, res) => {
+    const task = await Task.create(req.body);
+    res.status(201).json({
+        status: "success",
+        task,
+    });
+});
 
-exports.getAllTasks = async (req, res) => {
-    try {
-        const tasks = await Task.find();
-        res.status(200).json({
-            status: "success",
-            tasks,
-        });
-    } catch (error) {
-        res.status(400).json({
-            status: "failed",
-            error,
-        });
-    }
-};
+exports.getAllTasks = ash(async (req, res) => {
+    const tasks = await Task.find();
+    res.status(200).json({
+        status: "success",
+        tasks,
+    });
+});
