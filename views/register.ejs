@@ -4,19 +4,59 @@
 <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Index</title>
+     <title>Register</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
-<body>
-     <div>
-          <form method="post" action="users/signup">
-               <input type="text" name="name" id="name" placeholder="name">
-               <input type="text" name="surname" id="surname" placeholder="surname">
-               <input type="mail" name="mail" id="mail" placeholder="mail">
-               <input type="password" name="password" id="password" placeholder="password">
-               <button type="submit" value="signup">register</button>
-          </form>
+<body class="bg-light">
+     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="/">TO-DO</a>
+          <ul class="navbar-nav">
+               <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+               </li>
+          </ul>
+     </nav>
+     <div class="container mt-5">
+          <div class="row justify-content-center">
+               <div class="col-md-6">
+                    <div class="card">
+                         <div class="card-header bg-success text-white text-center">
+                              <h3>Register</h3>
+                         </div>
+                         <div class="card-body">
+                              <form method="post" action="users/signup">
+                                   <div class="form-group">
+                                        <label for="name">Name:</label>
+                                        <input type="text" class="form-control" id="name" name="name"
+                                             placeholder="Enter name" required>
+                                   </div>
+                                   <div class="form-group">
+                                        <label for="surname">Surname:</label>
+                                        <input type="text" class="form-control" id="surname" name="surname"
+                                             placeholder="Enter surname" required>
+                                   </div>
+                                   <div class="form-group">
+                                        <label for="mail">Email:</label>
+                                        <input type="email" class="form-control" id="mail" name="mail"
+                                             placeholder="Enter email" required>
+                                   </div>
+                                   <div class="form-group">
+                                        <label for="password">Password:</label>
+                                        <input type="password" class="form-control" id="password" name="password"
+                                             placeholder="Enter password" required>
+                                   </div>
+                                   <button type="submit" class="btn btn-success btn-block">Register</button>
+                              </form>
+                         </div>
+                    </div>
+               </div>
+          </div>
      </div>
+
+     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
