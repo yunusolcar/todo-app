@@ -1,10 +1,7 @@
-const express = require('express');
-const ejs = require("ejs");
-const mongoose = require('mongoose');
-const taskControllers = require("./controllers/taskControllers");
+const express = require("express");
 const taskRoutes = require("./routes/taskRoutes");
 const pageRoutes = require("./routes/pageRoutes");
-const db = require("./data/db");
+require("./data/db");
 
 const app = express();
 
@@ -13,14 +10,25 @@ app.set("view engine", "ejs");
 
 //Middlewares
 app.use(express.static("public"));
-app.use(express.json())
-app.use(express.urlencoded({
-     extended: true
-}));
+app.use(express.json());
+app.use(
+    express.urlencoded({
+        extended: true,
+    })
+);
 
 //Routes
-app.use('/', pageRoutes);
-app.use('/tasks', taskRoutes);
+app.use("/", pageRoutes);
+app.use("/tasks", taskRoutes);
+
+//Error handler
+// eslint-disable-next-line no-unused-vars
+app.use((error, req, res, next) => {
+    res.status(400).json({
+        status: "fail",
+        error: error.message,
+    });
+});
 
 //Port
 const port = 3000;
