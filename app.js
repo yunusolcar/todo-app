@@ -2,17 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-const taskRoutes = require("./routes/taskRoutes");
-const pageRoutes = require("./routes/pageRoutes");
-const userRoutes = require("./routes/userRoutes");
+const taskRoutes = require('./routes/taskRoutes');
+const pageRoutes = require('./routes/pageRoutes');
+const userRoutes = require('./routes/userRoutes');
+const mongoStore = require('./db');
+const settings = require('./settings');
 
 const app = express();
-
-//Db
-mongoose.connect('mongodb://127.0.0.1:27017/todo-db')
-     .then(() => {
-          console.log('DB Connected')
-     });
 
 //Template Engines
 app.set("view engine", "ejs");
@@ -27,12 +23,10 @@ app.use(express.urlencoded({
      extended: true
 }));
 app.use(session({
-     secret: 'cat_tom',
+     secret: settings.mongoConfig.sessionSecret,
      resave: false,
      saveUninitialized: false,
-     store: MongoStore.create({
-          mongoUrl: 'mongodb://127.0.0.1:27017/todo-db'
-     })
+     store: mongoStore.mongoStoreCon
 }));
 
 //Routes
@@ -45,5 +39,5 @@ app.use('/tasks', taskRoutes);
 app.use('/users', userRoutes);
 
 //Port
-const port = 3000;
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+const port = settings.mongoConfig.port;
+app.listen(port, () => console.log(`TO-DO App working`));
