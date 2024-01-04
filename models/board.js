@@ -19,6 +19,7 @@ const boardSchema = new Schema({
     members: [
         {
             name: String,
+            surname: String,
             email: String,
         },
     ],
