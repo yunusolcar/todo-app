@@ -18,20 +18,16 @@ global.userIn = null;
 
 //Middlewares
 app.use(express.static("public"));
-app.use(express.json());
-app.use(
-    express.urlencoded({
-        extended: true,
-    })
-);
-app.use(
-    session({
-        secret: settings.sessionSecret,
-        resave: false,
-        saveUninitialized: false,
-        store: mongoStore.mongoStoreCon,
-    })
-);
+app.use(express.json())
+app.use(express.urlencoded({
+     extended: true
+}));
+app.use(session({
+     secret: settings.mongoConfig.sessionSecret,
+     resave: false,
+     saveUninitialized: false,
+     store: mongoStore.mongoStoreCon
+}));
 
 //Routes
 app.use("*", (req, res, next) => {
@@ -44,5 +40,5 @@ app.use("/users", userRoutes);
 app.use("/boards", boardRoutes);
 
 //Port
-const port = settings.port;
+const port = settings.mongoConfig.port;
 app.listen(port, () => console.log(`TO-DO App working`));
