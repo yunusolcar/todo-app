@@ -1,12 +1,14 @@
 const Task = require("../models/task");
 
-exports.postCreateTask = async (req, res) => {
+exports.createTask = async (req, res) => {
     try {
-        const task = await Task.create(req.body);
-        res.status(201).json({
-            status: "success",
-            task,
+        await Task.create({
+            name: req.body.name,
+            description: req.body.description,
+            members: req.body.members,
+            status: req.body.status,
         });
+        res.status(201).redirect("/boards");
     } catch (error) {
         res.status(400).json({
             status: "fail",

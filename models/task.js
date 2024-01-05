@@ -15,7 +15,7 @@ const taskSchema = new Schema({
     members: [
         {
             name: String,
-            email: String,
+            mail: String,
         },
     ],
     status: {

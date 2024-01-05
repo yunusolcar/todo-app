@@ -1,6 +1,6 @@
 const Board = require("../models/board");
 const Task = require("../models/task");
-
+const User = require("../models/user");
 exports.createBoard = async (req, res) => {
     try {
         await Board.create({
@@ -17,16 +17,16 @@ exports.createBoard = async (req, res) => {
 
 exports.getAllBoards = async (req, res) => {
     try {
+        const user = await User.findById(req.session.userID);
         const boards = await Board.find().sort("-createdAt");
-        const tasks = await Task.find();
         res.status(200).render("boards", {
             boards,
-            tasks,
+            user,
             pageName: "boards",
         });
     } catch (error) {
         res.status(400).json({
-            status: "failed",
+            status: "fail",
             error,
         });
     }
@@ -34,11 +34,15 @@ exports.getAllBoards = async (req, res) => {
 
 exports.singleBoard = async (req, res) => {
     try {
+        const user = await User.findById(req.session.userID);
+        const tasks = await Task.find();
         const board = await Board.findOne({
             slug: req.params.slug,
         });
         res.status(200).render("board", {
             board,
+            tasks,
+            user,
             pageName: "board",
         });
     } catch (error) {

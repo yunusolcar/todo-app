@@ -4,7 +4,7 @@ const authenticationMiddleware = require("../middlewares/authentication");
 
 const router = express.Router();
 
-router.route("/").post(authenticationMiddleware, boardController.createBoard);
+router.route("/").post(boardController.createBoard);
 router.route("/").get(authenticationMiddleware, boardController.getAllBoards);
 router.route("/:slug").get(boardController.singleBoard);
 

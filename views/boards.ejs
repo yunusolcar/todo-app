@@ -18,8 +18,8 @@
                     <a class="nav-link" href="/boards">Boards</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/users/profile">Profile</a>
-                </li>
+                    <a class="nav-link" href="/users/profile"> <%=user.name %></a>
+               </li>
             </ul>
 
             <ul class="navbar-nav">
@@ -40,20 +40,12 @@
                             <a href="/boards/<%= boards[i].slug %>" title=""><%= boards[i].name %></a>
                         </h3>
                         <p class="card-text"><%= boards[i].boardDescription %></p>
-                        <!-- Tasks -->
-                        <% for (let x= 0; x < tasks.length; x++) { %>
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <p class="card-text">Task Name: <%= tasks[x].name %></p>
-                            </li>
-                            <li class="list-group-item">
-                                <p class="card-text">Task Description: <%= tasks[x].description %></p>
-                            </li>
-                            <li class="list-group-item">
-                                <p class="card-text">Task Status: <%= tasks[x].status %></p>
-                            </li>
-                        </ul>
-                        <% } %>
+                        <% for (let j = 0; j < boards[i].members.length; j++) { %>
+                            <li>Name: <%= boards[i].members[j].name %></li>
+                            <li>Mail: <%= boards[i].members[j].mail %></li>
+                            <% } %>
+                                                    <!-- Tasks -->
+                    
                     </div>
                 </div>
             </div>
