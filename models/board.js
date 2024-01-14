@@ -19,15 +19,13 @@ const boardSchema = new Schema({
     members: [
         {
             name: String,
-            //surname: String,
             mail: String,
         },
     ],
-    owner: [
-        {
-            name: String,
-        },
-    ],
+    owner: {
+        name: String,
+        mail: String,
+    },
     slug: {
         type: String,
         unique: true,

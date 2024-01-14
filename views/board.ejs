@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Single Board Page</title>
+    <title><%=board[0].slug %></title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -35,16 +35,13 @@
     <div class="container mt-4">
         <div class="card">
             <div class="card-body">
-               <!--  <div class="meta-info-blog">
-                    <span><i class="fa fa-calendar"></i>
-                        <p class="font-weight-light">%= board.createdAt %></p>
-                    </span>
-                </div> -->
                 <div class="blog-title">
-                    <h2 class="card-title"><%= board.name %></h2>
+                    <% for (let x= 0; x < board.length; x++) { %>
+                    <h2 class="card-title"><%= board[x].name %></h2>
                 </div>
                 <div class="blog-desc">
-                    <p class="card-text"><%= board.boardDescription %></p>
+                    <p class="card-text"><%= board[x].boardDescription %></p>
+                    <% } %>
                 </div>
 
                 <% for (let x= 0; x < tasks.length; x++) { %>

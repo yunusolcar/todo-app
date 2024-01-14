@@ -74,9 +74,7 @@ exports.getProfile = async (req, res) => {
     const user = await User.findOne({
         _id: req.session.userID,
     });
-    const boards = await Board.find({
-        user: req.session.userID,
-    });
+    const boards = await Board.find();
     res.status(200).render("profile", {
         pageName: "profile",
         user,
