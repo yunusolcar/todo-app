@@ -23,8 +23,7 @@ checkDuplicateMail = async (req, res, next) => {
 
 exports.createUser = async (req, res) => {
      try {
-          checkDuplicateMail(req, res, async () => {
-
+          await checkDuplicateMail(req, res, async () => {
                const user = await User.create(req.body);
                res.status(201).redirect('/login');
           });
