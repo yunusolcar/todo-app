@@ -1,5 +1,4 @@
 const User = require("../models/user");
-const Board = require("../models/board");
 const bcrypt = require("bcrypt");
 
 checkDuplicateMail = async (req, res, next) => {
@@ -71,13 +70,8 @@ exports.logoutUser = (req, res) => {
 };
 
 exports.getProfile = async (req, res) => {
-    const user = await User.findOne({
-        _id: req.session.userID,
-    });
-    const boards = await Board.find();
+    const user = await User.findById(req.session.userID);
     res.status(200).render("profile", {
-        pageName: "profile",
         user,
-        boards,
     });
 };

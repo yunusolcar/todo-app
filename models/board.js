@@ -7,6 +7,10 @@ const boardSchema = new Schema({
         type: String,
         required: true,
     },
+    task: {
+        id: Object,
+        name: String,
+    },
     createdAt: {
         type: Date,
         default: Date.now,
@@ -23,6 +27,7 @@ const boardSchema = new Schema({
         },
     ],
     owner: {
+        id: Object,
         name: String,
         mail: String,
     },

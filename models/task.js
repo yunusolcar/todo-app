@@ -1,7 +1,12 @@
 const mongoose = require("mongoose");
+const slugify = require("slugify");
 const Schema = mongoose.Schema;
 
 const taskSchema = new Schema({
+    board: {
+        id: Object,
+        name: String,
+    },
     name: {
         type: String,
         unique: true,
@@ -11,6 +16,11 @@ const taskSchema = new Schema({
         type: String,
         trim: true,
         required: false,
+    },
+    owner: {
+        id: Object,
+        name: String,
+        mail: String,
     },
     members: [
         {
@@ -30,6 +40,18 @@ const taskSchema = new Schema({
     completedAt: {
         type: Date,
     },
+    slug: {
+        type: String,
+        unique: true,
+    },
+});
+
+taskSchema.pre("validate", function (next) {
+    this.slug = slugify(this.name, {
+        lower: true,
+        strict: true,
+    });
+    next();
 });
 
 const Task = mongoose.model("Task", taskSchema);

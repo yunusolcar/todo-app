@@ -10,13 +10,13 @@ exports.createBoard = async (req, res) => {
             boardDescription: req.body.boardDescription,
             members: req.body.members,
             owner: {
+                id: user._id,
                 name: user.name,
                 mail: user.mail,
             },
         });
         res.status(201).redirect("/boards");
     } catch (error) {
-        console.log(error);
         res.status(400).redirect("/");
     }
 };
@@ -24,7 +24,7 @@ exports.createBoard = async (req, res) => {
 exports.getAllBoards = async (req, res) => {
     try {
         const user = await User.findById(req.session.userID);
-        const boards = await Board.find({ "owner.mail": user.mail }).sort("-createdAt");
+        const boards = await Board.find({ "owner.id": user._id }).sort("-createdAt");
         res.status(200).render("boards", {
             user,
             boards,
@@ -40,8 +40,8 @@ exports.getAllBoards = async (req, res) => {
 exports.singleBoard = async (req, res) => {
     try {
         const user = await User.findById(req.session.userID);
-        const tasks = await Task.find();
         const board = await Board.find({ "owner.mail": user.mail, slug: req.params.slug });
+        const tasks = await Task.find({ "board.id": board[0]._id });
         res.status(200).render("board", {
             board,
             tasks,
