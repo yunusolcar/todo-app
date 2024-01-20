@@ -22,7 +22,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/users/profile"> <%=user.name %></a>
-               </li>
+                </li>
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -32,63 +32,54 @@
         </div>
     </nav>
 
-    <div class="container mt-4">
+    <div class="container-fluid mt-4">
         <div class="card">
             <div class="card-body">
                 <div class="blog-title">
                     <% for (let x= 0; x < board.length; x++) { %>
                     <h2 class="card-title"><%= board[x].name %></h2>
+                    <% } %>
                 </div>
                 <div class="blog-desc">
+                    <% for (let x= 0; x < board.length; x++) { %>
                     <p class="card-text"><%= board[x].boardDescription %></p>
                     <% } %>
                 </div>
 
-                <div class="container mt-5">
+                <div class="row mt-5">
                     <% for (let x= 0; x < board.length; x++) { %>
-                    <form action="/tasks/<%= board[x].slug %>" method="post">
-                        
-                         <div class="mb-3">
-                              <label for="name" class="form-label">Task Name:</label>
-                              <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" required>
-                         </div>
-                         <div class="mb-3">
-                              <label for="description" class="form-label">Task Description:</label>
-                              <input type="text" class="form-control" id="description" name="description"
-                                   placeholder="Enter Board Description" required>
-                         </div>
-                         <!-- <div class="mb-3">
-                              <label for="members" class="form-label">Members' Mail:</label>
-                              <input type="text" class="form-control" id="members" name="members" placeholder="Select Members">
-                         </div> -->
-                         <div class="mb-3">
-                              <label for="status" class="form-label">Task Status:</label>
-                              <input type="text" class="form-control" id="status" name="status"
-                                   placeholder="Enter task status" required>
-                         </div>
-                         <div class="mb-3">
-                              <button type="submit" class="btn btn-primary">Submit</button>
-                         </div>
-                    </form>
-                    <% } %>
-               </div>
-
-                <% for (let x= 0; x < tasks.length; x++) { %>
-                <div class="card mt-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Task Name: <%= tasks[x].name %></h5>
-                        <p class="card-text">Task Description: <%= tasks[x].description %></p>
-                        <p class="card-text">Task Status: <%= tasks[x].status %></p>
+                    <div class="col-md-4">
+                        <form action="/lists/<%= board[x].slug %>" method="post" class="card">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">List Name:</label>
+                                    <input type="text" class="form-control" id="name" name="name"
+                                        placeholder="Enter List Name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <button type="submit" class="btn btn-primary">Add List</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
+                    <% } %>
                 </div>
-                <% } %>
+
+                <div class="row mt-3">
+                    <% for (let x= 0; x < list.length; x++) { %>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">List Name: <%= list[x].name %></h5>
+                                <p class="card-text">List Members: <%= list[x].members %></p>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
             </div>
         </div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 
 </html>

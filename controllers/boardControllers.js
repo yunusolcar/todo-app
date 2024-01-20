@@ -1,6 +1,7 @@
 const Board = require("../models/board");
 const Task = require("../models/task");
 const User = require("../models/user");
+const List = require("../models/list");
 
 exports.createBoard = async (req, res) => {
     try {
@@ -41,10 +42,10 @@ exports.singleBoard = async (req, res) => {
     try {
         const user = await User.findById(req.session.userID);
         const board = await Board.find({ "owner.mail": user.mail, slug: req.params.slug });
-        const tasks = await Task.find({ "board.id": board[0]._id });
+        const list = await List.find({ "board.id": board[0]._id });
         res.status(200).render("board", {
             board,
-            tasks,
+            list,
             user,
         });
     } catch (error) {

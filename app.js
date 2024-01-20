@@ -5,6 +5,7 @@ const boardRoutes = require("./routes/boardRoutes");
 const taskRoutes = require("./routes/taskRoutes");
 const pageRoutes = require("./routes/pageRoutes");
 const userRoutes = require("./routes/userRoutes");
+const listRoutes = require("./routes/listRoutes");
 const mongoStore = require("./db");
 const settings = require("./settings");
 const app = express();
@@ -41,6 +42,7 @@ app.use("/", pageRoutes);
 app.use("/tasks", taskRoutes);
 app.use("/users", userRoutes);
 app.use("/boards", boardRoutes);
+app.use("/lists", listRoutes);
 
 //Port
 const port = settings.mongoConfig.port;
