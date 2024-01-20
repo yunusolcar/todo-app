@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=board[0].slug %></title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">TO-DO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/boards">Boards</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/profile"> <%=user.name %></a>
+               </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="blog-title">
+                    <% for (let x= 0; x < board.length; x++) { %>
+                    <h2 class="card-title"><%= board[x].name %></h2>
+                </div>
+                <div class="blog-desc">
+                    <p class="card-text"><%= board[x].boardDescription %></p>
+                    <% } %>
+                </div>
+
+                <div class="container mt-5">
+                    <% for (let x= 0; x < board.length; x++) { %>
+                    <form action="/tasks/<%= board[x].slug %>" method="post">
+                        
+                         <div class="mb-3">
+                              <label for="name" class="form-label">Task Name:</label>
+                              <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" required>
+                         </div>
+                         <div class="mb-3">
+                              <label for="description" class="form-label">Task Description:</label>
+                              <input type="text" class="form-control" id="description" name="description"
+                                   placeholder="Enter Board Description" required>
+                         </div>
+                         <!-- <div class="mb-3">
+                              <label for="members" class="form-label">Members' Mail:</label>
+                              <input type="text" class="form-control" id="members" name="members" placeholder="Select Members">
+                         </div> -->
+                         <div class="mb-3">
+                              <label for="status" class="form-label">Task Status:</label>
+                              <input type="text" class="form-control" id="status" name="status"
+                                   placeholder="Enter task status" required>
+                         </div>
+                         <div class="mb-3">
+                              <button type="submit" class="btn btn-primary">Submit</button>
+                         </div>
+                    </form>
+                    <% } %>
+               </div>
+
+                <% for (let x= 0; x < tasks.length; x++) { %>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Task Name: <%= tasks[x].name %></h5>
+                        <p class="card-text">Task Description: <%= tasks[x].description %></p>
+                        <p class="card-text">Task Status: <%= tasks[x].status %></p>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
