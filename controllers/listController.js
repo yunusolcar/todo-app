@@ -15,7 +15,7 @@ exports.createList = async (req, res) => {
                 name: board[0].name,
             },
         });
-        res.status(201).redirect("/boards");
+        res.status(201).redirect(`/boards/${req.params.slug}`);
     } catch (error) {
         res.status(400).json({
             status: "fail",

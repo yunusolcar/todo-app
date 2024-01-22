@@ -1,6 +1,10 @@
-exports.getIndex = (req, res) => {
+const User = require("../models/user");
+
+exports.getIndex = async (req, res) => {
+    const user = await User.findById(req.session.userID);
     res.status(200).render("index", {
         pageName: "Index",
+        user,
     });
 };
 
