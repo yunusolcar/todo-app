@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Boards</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <a class="navbar-brand" href="/">TO-DO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/boards">My Boards</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#createBoardModal">Create Board</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/profile"><%= user.name %></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <% for (let i = 0; i < boards.length; i++) { %>
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="card mb-5">
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            <a href="/boards/<%= boards[i].slug %>" title=""><%= boards[i].name %></a>
+                        </h3>
+                        <p class="card-text"><%= boards[i].boardDescription %></p>
+                        <% for (let j = 0; j < boards[i].members.length; j++) { %>
+                        <li>Name: <%= boards[i].members[j].name %></li>
+                        <li>Mail: <%= boards[i].members[j].mail %></li>
+                        <% } %>
+                        <!-- Tasks -->
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        </div>
+    </div>
+
+    <!-- Create Board Modal -->
+    <div class="modal" id="createBoardModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Create Board</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <form action="/boards" method="post">
+                        <div class="mb-3">
+                            <label for="boardName" class="form-label">Board Name:</label>
+                            <input type="text" class="form-control" id="boardName" name="name"
+                                placeholder="Enter Board Name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="boardDescription" class="form-label">Board Description:</label>
+                            <input type="text" class="form-control" id="boardDescription" name="boardDescription"
+                                placeholder="Enter Board Description" required>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary">Create Board</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
