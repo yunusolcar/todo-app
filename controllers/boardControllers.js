@@ -43,10 +43,12 @@ exports.singleBoard = async (req, res) => {
         const user = await User.findById(req.session.userID);
         const board = await Board.find({ "owner.mail": user.mail, slug: req.params.slug });
         const list = await List.find({ "board.id": board[0]._id });
+        const tasks = await Task.find({ "tasks.id": list._id });
         res.status(200).render("board", {
             board,
             list,
             user,
+            tasks,
         });
     } catch (error) {
         res.status(400).json({

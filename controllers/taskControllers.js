@@ -1,11 +1,13 @@
 const Task = require("../models/task");
 const User = require("../models/user");
 const Board = require("../models/board");
+const List = require("../models/list");
 
 exports.createTask = async (req, res) => {
     try {
         const user = await User.findById(req.session.userID);
         const board = await Board.find({ "owner.id": user._id, slug: req.params.slug });
+        const list = await List.find({ "list.id": board._id });
         await Task.create({
             name: req.body.name,
             description: req.body.description,
@@ -16,9 +18,9 @@ exports.createTask = async (req, res) => {
                 name: user.name,
                 mail: user.mail,
             },
-            board: {
-                id: board[0]._id,
-                name: board[0].name,
+            list: {
+                id: list[0]._id,
+                name: list[0].name,
             },
         });
         res.status(201).redirect("/boards");

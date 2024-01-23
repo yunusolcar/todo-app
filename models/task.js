@@ -3,7 +3,7 @@ const slugify = require("slugify");
 const Schema = mongoose.Schema;
 
 const taskSchema = new Schema({
-    board: {
+    list: {
         id: Object,
         name: String,
     },
@@ -30,7 +30,7 @@ const taskSchema = new Schema({
     ],
     status: {
         type: Number,
-        enum: [0, 1, 2], //0: New        1: In Progress       2: Completed
+        enum: [0, 1, 2], //0: Not Started        1: In Progress       2: Completed
         required: true,
     },
     createdAt: {
